@@ -45,21 +45,36 @@ namespace wpclient
 
         }
 
+        private void insertData()
+        {
+            string conStr = "server=hipsters.mysql.ukraine.com.ua;user=hipsters_guru;" +
+                             "database=hipsters_guru;password=hipsters_guru;";
+
+            using (MySqlConnection con = new MySqlConnection(conStr))
+            {
+                try
+                {
+                    string sql = "INSERT INTO friendf (name, lastname, age)" +
+                                 "VALUES ('Mishaa', 'Ivanova', 23)";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, con);
+
+                    con.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Данные добавлены!");
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
-            string CommandText = "CREATE TABLE infoks";
-            string Connect = "Database=hipsters_guru;Data Source=hipsters.mysql.ukraine.com.ua;User Id=hipsters_guru;Password=hipsters_guru";
-            //Переменная Connect - это строка подключения в которой:
-            //БАЗА - Имя базы в MySQL
-            //ХОСТ - Имя или IP-адрес сервера (если локально то можно и localhost)
-            //ПОЛЬЗОВАТЕЛЬ - Имя пользователя MySQL
-            //ПАРОЛЬ - говорит само за себя - пароль пользователя БД MySQL
-            MySqlConnection myConnection = new MySqlConnection(Connect);
-            MySqlCommand myCommand = new MySqlCommand(CommandText, myConnection);
-            myConnection.Open(); //Устанавливаем соединение с базой данных.
-            MyCommand.ExecuteNonQuery();                   //Что то делаем...
-            myConnection.Close(); //Обязательно закрываем соединение!
-
+            insertData();
         }
     }
 }
