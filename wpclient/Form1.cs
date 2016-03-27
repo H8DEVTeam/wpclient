@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;    
 
 namespace wpclient
 {
@@ -40,6 +41,17 @@ namespace wpclient
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            MySqlConnection con = new MySqlConnection("Server=127.0.0.1;Database=666;Uid=root;Pwd=;");
+            MySqlCommand com = new MySqlCommand("CREATE DATABASE `shit`", con);
+            com.CommandType = CommandType.Text;
+            con.Open();
+            com.ExecuteNonQuery();
+            con.Close();
         }
     }
 }
