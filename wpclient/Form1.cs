@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;    
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
+
 
 namespace wpclient
 {
@@ -45,13 +47,19 @@ namespace wpclient
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string CommandText = "CREATE TABLE infoks";
+            string Connect = "Database=hipsters_guru;Data Source=hipsters.mysql.ukraine.com.ua;User Id=hipsters_guru;Password=hipsters_guru";
+            //Переменная Connect - это строка подключения в которой:
+            //БАЗА - Имя базы в MySQL
+            //ХОСТ - Имя или IP-адрес сервера (если локально то можно и localhost)
+            //ПОЛЬЗОВАТЕЛЬ - Имя пользователя MySQL
+            //ПАРОЛЬ - говорит само за себя - пароль пользователя БД MySQL
+            MySqlConnection myConnection = new MySqlConnection(Connect);
+            MySqlCommand myCommand = new MySqlCommand(CommandText, myConnection);
+            myConnection.Open(); //Устанавливаем соединение с базой данных.
+            MyCommand.ExecuteNonQuery();                   //Что то делаем...
+            myConnection.Close(); //Обязательно закрываем соединение!
 
-            MySqlConnection con = new MySqlConnection("Server=127.0.0.1;Database=666;Uid=root;Pwd=;");
-            MySqlCommand com = new MySqlCommand("CREATE DATABASE `shit`", con);
-            com.CommandType = CommandType.Text;
-            con.Open();
-            com.ExecuteNonQuery();
-            con.Close();
         }
     }
 }
